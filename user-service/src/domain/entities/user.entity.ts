@@ -1,7 +1,6 @@
 import type { AuthProvider } from "../value-objects/auth-provider.vo";
 
 export type UserRole = "admin" | "user" | "interviewer" | "org";
-
 export type UserStatus = "active" | "blocked";
 
 export class User {
