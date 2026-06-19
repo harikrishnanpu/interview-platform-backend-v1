@@ -1,6 +1,6 @@
-import { IRead } from "@domain/repositories/base/read";
-import { IWrite } from "domain/repositories/base/write";
-import { IDbMapper } from "@domain/mappers/db.mapper";
+import type { IDbMapper } from "@domain/mappers/db.mapper";
+import type { IRead } from "@domain/repositories/base/read";
+import type { IWrite } from "domain/repositories/base/write";
 
 export abstract class BaseRepository<
 	Entity,
