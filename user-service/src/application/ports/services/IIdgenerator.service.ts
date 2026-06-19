@@ -1,3 +1,3 @@
 export interface IIdGeneratorService {
-	generateId(): Promise<string>;
+	generateId(): string;
 }

@@ -11,6 +11,4 @@ export interface SingnUpResponseDto {
 	id: string;
 	name: string;
 	email: string;
-	accessToken: string;
-	refreshToken: string;
 }

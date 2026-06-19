@@ -1,6 +1,6 @@
 import { ConflictException, Injectable } from "@nestjs/common";
-import type { ICommandHandler } from "@nestjs/cqrs";
-import type { SignupUserCommand } from "application/commands/signup.command";
+import { CommandHandler, type ICommandHandler } from "@nestjs/cqrs";
+import { SignupUserCommand } from "application/commands/signup.command";
 import { SIGNUP_USER_CONSTANTS } from "application/constants/signup.constants";
 import type { SingnUpResponseDto } from "application/dtos/singnup.dto";
 import type { IIdGeneratorService } from "application/ports/services/IIdgenerator.service";
@@ -10,6 +10,7 @@ import { User } from "domain/entities/user.entity";
 import type { IUserRepository } from "domain/repositories/user.repo";
 import { AuthProvider } from "domain/value-objects/auth-provider.vo";
 
+@CommandHandler(SignupUserCommand)
 @Injectable()
 export class SignupUserHandler
 	implements ICommandHandler<SignupUserCommand, SingnUpResponseDto>
@@ -40,7 +41,7 @@ export class SignupUserHandler
 			provider: AuthProvider.create(provider, passwordHash),
 		});
 
-		const newUser = await this._userRepository.create(newUserEntity);
+		const newUser = await this._userRepository.save(newUserEntity);
 
 		const userResponseDto = {
 			id: newUser.id,
@@ -56,10 +57,6 @@ export class SignupUserHandler
 		const refreshToken =
 			await this._tokenService.generateRefreshToken(userResponseDto);
 
-		return {
-			...userResponseDto,
-			accessToken,
-			refreshToken,
-		};
+		return userResponseDto;
 	}
 }
