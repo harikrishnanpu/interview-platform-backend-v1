@@ -1,0 +1,28 @@
+
+
+
+enum AuthProvider {
+    GOOGLE
+    LOCAL
+}
+
+
+enum UserRole {
+    ADMIN
+    USER
+    INTERVIEWER
+    ORG
+}
+
+
+
+model User {
+    id        String   @id @default(cuid())
+    name      String
+    email     String   @unique
+    provider  AuthProvider
+    password  String
+    role      UserRole  @default(USER)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
