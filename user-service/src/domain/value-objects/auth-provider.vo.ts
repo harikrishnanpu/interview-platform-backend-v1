@@ -4,7 +4,10 @@ export class AuthProvider {
 		protected readonly passwordHash?: string,
 	) {}
 
-	create(provider: "google" | "local", passwordHash?: string): AuthProvider {
+	public static create(
+		provider: "google" | "local",
+		passwordHash?: string,
+	): AuthProvider {
 		if (provider === "local" && !passwordHash) {
 			throw new Error("Password hash is required for local authentication");
 		}
