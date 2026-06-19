@@ -1,6 +1,6 @@
-import { User } from "../user.entity";
-import { IRead } from "./base/read";
-import { IWrite } from "./base/write";
+import type { User } from "../entities/user.entity";
+import type { IRead } from "./base/read";
+import type { IWrite } from "./base/write";
 
 export interface IUserRepository
 	extends IRead<User, { email: string }>,
